@@ -42,6 +42,13 @@ const bookSchema = new mongoose.Schema({
 {/* I use the Schema to construct a database model */}
 const bookModel = mongoose.model('books' ,bookSchema);
 
+//Put comment here
+app.delete('/api/books/:id', async (req, res)=>{
+  console.log("Delete: "+req.params.id);
+  let book =  await bookModel.findByIdAndDelete(req.params.id);
+  res.send(book);
+})
+
 {/* I added a post method on the Express Server that will console log both the title, 
 author and cover of the object passed up by the React App */}
 app.post('/api/books', (req, res) => {

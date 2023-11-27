@@ -27,11 +27,26 @@ function Read() {
             );
     }, []);
 
+    const ReloadData = (e) =>{
+        axios.get('http://localhost:4000/api/books')
+        .then(
+            (response) => {
+                setData(response.data);
+            }
+        )
+
+        .catch(
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
     return (
         <div>
 
             <h2>Hello from my Read component</h2>
-            <Book myBook={data}></Book>
+            <Book myBook={data} Reload={ReloadData}></Book>
         </div>
 
     );
