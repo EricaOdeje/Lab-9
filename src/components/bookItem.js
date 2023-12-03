@@ -16,21 +16,25 @@ function BookItem(props) {
         	
             {/*  This link will edit will change book */}
             <Link to={"/edit/" + props.mybook._id} className='btn btn-primary'>Edit</Link>
-            {/*  This link will edit will change book */}
+
+            {/* This is a button to delete the book */}
             <Button onClick={(e) => {
                 e.preventDefault();
+             {/* Axios request to delete the book based on its ID */}
                 axios.delete('http://localhost:4000/api/books/' +props.mybook._id)
-
-                //Put comment here
                 .then((res) =>{
+                {/* Reload the book list after successful deletion */}
                     props.reload();
                 })
-                .catch();
+                 .catch((err) => {
+                     {/* Log error if delete operation fails */}
+                            console.error("Delete failed:", err);
+                        });
 
             }}className='btn btn-danger'>Delete</Button>
         </div>
     );
 
 }
-
+ {/* Export the BookItem component */}
 export default BookItem;
